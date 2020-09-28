@@ -31,7 +31,7 @@ describe('Gists testcases', () => {
         });
 
         it('Should list all comments gists successfully', async() => {
-            const response = await gist.listAllCommintsOfGist(token, gistIdWithComments);
+            const response = await gist.listAllCommentsOfGist(token, gistIdWithComments);
             assertions.assertSuccessStatusCode(response);
         });
 

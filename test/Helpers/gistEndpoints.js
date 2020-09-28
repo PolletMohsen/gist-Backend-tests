@@ -51,7 +51,7 @@ module.exports = {
               }
             ),
     
-    listAllCommintsOfGist: (token, gistId) => 
+    listAllCommentsOfGist: (token, gistId) => 
         request('https://api.github.com')
             .get(`/gists/:${gistId}/commits`)  
             .set({
