@@ -29,24 +29,6 @@ module.exports = {
                   "content": "class HelloWorld:\n\n    def __init__(self, name):\n        self.name = name.capitalize()\n       \n    def sayHi(self):\n        print \"Hello \" + self.name + \"!\"\n\nhello = HelloWorld(\"world\")\nhello.sayHi()"
                 },
               }),
-    
-    createNewGist:(token, username) =>
-        request('https://api.github.com')
-            .post(`/users/:${username}/gists`)
-            .set({
-                authorization: `Bearer ${token}`,
-            })
-            .set('Accept', 'application/vnd.github.v3+json')
-            .set('description','Test description')
-            .set('public', true)
-            .set('files', {
-                "hello_world.rb": {
-                  "content": "class HelloWorld\n   def initialize(name)\n      @name = name.capitalize\n   end\n   def sayHi\n      puts \"Hello !\"\n   end\nend\n\nhello = HelloWorld.new(\"World\")\nhello.sayHi"
-                },
-                "hello_world.py": {
-                  "content": "class HelloWorld:\n\n    def __init__(self, name):\n        self.name = name.capitalize()\n       \n    def sayHi(self):\n        print \"Hello \" + self.name + \"!\"\n\nhello = HelloWorld(\"world\")\nhello.sayHi()"
-                },
-              }),
 
     updateGistByGistId:(token, username, gistId) =>
         request('https://api.github.com')

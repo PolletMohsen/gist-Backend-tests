@@ -5,14 +5,12 @@ const {
     gist
 } = require('./Helpers');
 
-describe('Get filters from legacy', () => {
+describe('Gists testcases', () => {
     const token = 'get your valid token';
     const username = 'set your valid github username';
     const expectedGistID = 'aa5a315d61ae9438b18d';
+    const gistIdWithComments = 'cc5a315d61ae9438b1re';
 
-    before(async() => {
-       
-    });
 
     describe('Valid Cases', () => {
         it('Should return  gists of user', async() => {
@@ -32,43 +30,21 @@ describe('Get filters from legacy', () => {
             assertions.assertGistId(response, expectedGistID);
         });
 
+        it('Should list all comments gists successfully', async() => {
+            const response = await gist.listAllCommintsOfGist(token, gistIdWithComments);
+            assertions.assertSuccessStatusCode(response);
+        });
+
     });
 
     describe('InValid Cases', () => {
-        it('Should return an error when sending invalid one source', async() => {
-            const response = await getQueriesEP.getQueriesBySources(
-                ['blogs', 'for', 'news'], signatureToken,
-            );
-
-            expect(response.body).to.deep.equals({
-                ok: false,
-                error: 'signature_authentication.invalid_payload_signature',
-            });
+        it('Should return an error when sending invalid one token', async() => {
+            const response = await gist.getGistsOfUser('Invalid token', username);
+            assertions.assertForbiddenErrorStatusCode(response);
         });
 
-        it('Should return an error when sending invalid source', async() => {
-            const response = await getQueriesEP.getQueriesBySources(['blo'], signatureToken);
-
-            expect(response.body).to.deep.equals({
-                ok: false,
-                error: 'signature_authentication.invalid_payload_signature',
-            });
+        it('Should return an error when sending invalid gist id while updating', async() => {
+            const response = await gist.updateGistByGistId(token, username, 'InvalidID');
+            assertions.assertBadRequestStatusCode(response);
         });
-
-        it('Should return an error when sending invalid signature', async() => {
-            const invalidToken = {
-                timestamp: '1598180147',
-                signature: '97bad51be4ad6c697e74c65d0580db7f51a3e3d0f515965',
-            };
-
-            const response = await getQueriesEP.getQueriesBySources(
-                ['blogs', 'forums', 'news'], invalidToken,
-            );
-
-            expect(response.body).to.deep.equals({
-                ok: false,
-                error: 'signature_authentication.expired_signature',
-            });
-        });
-    });
 });
