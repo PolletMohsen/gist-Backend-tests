@@ -1,0 +1,49 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "Api Testing of gist",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolletMohsen/gist-Backend-tests"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "main": ".endpointSpec.js",
+  "scripts": {
+    "debugger": "nodemon --watch . --exec 'npm run test -- --inspect-brk=0.0.0.0:9229 || true'",
+    "test": "mocha ./test/",
+    "coverage": "nyc npm run test",
+    "lint": "eslint ./src/ ./test/ ./index.js",
+    "depcheck": "npm-check -u"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/git": "^7.0.18",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^6.7.1",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
+    "npm-check": "^5.9.0",
+    "nyc": "^14.1.1",
+    "semantic-release": "^15.13.31",
+    "chai-subset": "^1.6.0",
+    "lodash": "^4.17.15",
+    "mochawesome": "^4.1.0",
+    "moment": "^2.24.0",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "googleapis": "^47.0.0"
+  },
+  "keywords": [
+    "googleapis",
+    "client",
+    "automation",
+    "polling"
+  ],
+  "author": "Pollet Mohsen"
+}
